@@ -1,0 +1,88 @@
+{
+	"info": {
+		"_postman_id": "7a0ce6d5-3c02-4a8b-8fe6-8f7aff449810",
+		"name": "pets-collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "findAllPets",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"test valid json\", function(){",
+							"    pm.response.to.be.json",
+							"})",
+							"",
+							"var data = pm.response.json()",
+							"",
+							"pm.test(\"test that response has 2 pets\", function(){",
+							"    pm.expect(data.length).eq(2)",
+							"})",
+							"",
+							"pm.environment.set(\"petId\", data[0].id)",
+							"pm.environment.set(\"petName\", data[1].name)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/pets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getDescriptionById",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()",
+							"pm.test(\"test pet description is correct\",function(){",
+							"    pm.expect(data.description).includes(pm.environment.get(\"petName\"))",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/pets/{{petId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pets",
+						"{{petId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

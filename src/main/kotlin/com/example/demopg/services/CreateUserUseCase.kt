@@ -1,9 +1,9 @@
 package com.example.demopg.services
 
-import com.example.demopg.repository.entitys.Rol
-import com.example.demopg.repository.entitys.RolRepository
-import com.example.demopg.repository.entitys.User
-import com.example.demopg.repository.entitys.UserRepository
+import com.example.demopg.entities.Rol
+import com.example.demopg.repository.RolRepository
+import com.example.demopg.repository.UserRepository
+import com.example.demopg.repository.entities.User
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
