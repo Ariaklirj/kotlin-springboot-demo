@@ -9,15 +9,18 @@ import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 
 @Service
-class CreateUserUseCase {
+class UserUsesCases {
     @Autowired
     lateinit var userRepository: UserRepository
     @Autowired
     lateinit var rolRepository: RolRepository
 
-    fun  execute(user:User):User {
+    fun  executeCreateUser(user:User):User {
         user.rol = getRolByLastName(user.lastname)
         return  userRepository.save(user)
+    }
+    fun executeGetUser(id:Long):User?{
+        return  userRepository.findByid(id)
     }
 
     fun getRolByLastName(lastname: String) : Rol?{

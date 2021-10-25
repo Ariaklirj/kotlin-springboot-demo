@@ -19,4 +19,5 @@ data class User (var firstname: String,
 
 interface UserRepository : CrudRepository<User?, Long?> {
     fun findBylastname(lastname: String?): List<User?>?
+    fun findByid(id: Long):User?
 }
